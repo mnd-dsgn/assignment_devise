@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :current_user, except: [:new, :show, :index]
 
   # GET /users
   # GET /users.json
@@ -26,7 +27,6 @@ class UsersController < ApplicationController
   def create
 
     @user = User.new(user_params)
-asdf
     respond_to do |format|
       if @user.save
         sign_in(:user, @user)

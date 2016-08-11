@@ -16,7 +16,9 @@
 
 </head>
 <body>
-
+  Welcome, <%= current_user.username  if !!current_user%></br>
+  <%= link_to "Sign in", sign_in_path if !current_user %>
+  <%= link_to "Sign out", sign_out_path, method: :delete if !!current_user %>
   <% flash.each do |type, message| %>
   <div>
     <strong><%= type %>! <%= message %></strong>
