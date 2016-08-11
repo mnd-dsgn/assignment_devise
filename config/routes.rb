@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users do 
-    sessions: 'users/sessions'
-  end
-  
+  devise_for :users, controllers: {sessions: 'users/sessions'}
+
   resources :users
 
   root "users#index"
