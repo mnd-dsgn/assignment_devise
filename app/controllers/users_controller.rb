@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :current_user, except: [:new, :show, :index]
+  before_action :require_account_owner, :only => [:edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -34,6 +35,7 @@ class UsersController < ApplicationController
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
+        flash.now[:error] = "Error:" + @user.errors.full_messages.join(', ')
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
